@@ -4,6 +4,7 @@ const _ = require('lodash');
 import "./style.css"
 
 
+console.log('HACKER_NEWS_API_URL:', process.env.HACKER_NEWS_API_URL);
 
 
 
