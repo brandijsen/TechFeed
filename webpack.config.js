@@ -46,7 +46,14 @@ const config = {
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: 'asset',
+                use: {
+                    loader: 'img-optimize-loader',
+                    options: {
+                        compress: {
+                            mode: 'low'
+                        }
+                    }
+                }    
             },
 
             // Add your rules for custom modules here
