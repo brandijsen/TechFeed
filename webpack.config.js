@@ -28,7 +28,8 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
-            new Dotenv()
+            new Dotenv(),
+            
 
 
         // Add your plugins here
@@ -65,9 +66,10 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-        
+
         config.plugins.push(new MiniCssExtractPlugin());
-        
+            config.plugins.push(new Dotenv());
+
         
     } else {
         config.mode = 'development';

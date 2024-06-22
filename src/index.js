@@ -112,6 +112,9 @@ setInterval(rotateImages, 3000);
 
 let moreNewsContainer; // Define this variable in the outer scope
 
+
+
+
 async function getNews() {
   try {
     const response = await axios.get(`${process.env.HACKER_NEWS_API_URL}/newstories.json`);
