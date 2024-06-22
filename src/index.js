@@ -5,6 +5,8 @@ import "./style.css"
 
 
 console.log('HACKER_NEWS_API_URL:', process.env.HACKER_NEWS_API_URL);
+console.log('NEWSTORIES_ENDPOINT:', process.env.NEWSTORIES_ENDPOINT);
+console.log('ITEM_ENDPOINT:', process.env.ITEM_ENDPOINT);
 
 
 
@@ -117,12 +119,12 @@ let moreNewsContainer; // Define this variable in the outer scope
 
 async function getNews() {
   try {
-    const response = await axios.get(`${process.env.HACKER_NEWS_API_URL}/newstories.json`);
+    const response = await axios.get(`${process.env.HACKER_NEWS_API_URL}/${process.env.NEWSTORIES_ENDPOINT}`);
     const newsIds = response.data;
 
     const lastNewsIds = newsIds.slice(0, 20);
     const lastNewsPromises = lastNewsIds.map(id =>
-      axios.get(`${process.env.HACKER_NEWS_API_URL}/item/${id}.json`)
+      axios.get(`${process.env.HACKER_NEWS_API_URL}/${process.env.ITEM_ENDPOINT}/${id}.json`)
     );
 
     const lastNewsResponses = await Promise.all(lastNewsPromises);
