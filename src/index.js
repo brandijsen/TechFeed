@@ -4,9 +4,13 @@ const _ = require('lodash');
 import "./style.css"
 
 
-console.log('HACKER_NEWS_API_URL:', process.env.HACKER_NEWS_API_URL);
-console.log('NEWSTORIES_ENDPOINT:', process.env.NEWSTORIES_ENDPOINT);
-console.log('ITEM_ENDPOINT:', process.env.ITEM_ENDPOINT);
+const HACKER_NEWS_API_URL = process.env.HACKER_NEWS_API_URL;
+const NEWSTORIES_ENDPOINT = process.env.NEWSTORIES_ENDPOINT;
+const ITEM_ENDPOINT = process.env.ITEM_ENDPOINT;
+
+console.log('HACKER_NEWS_API_URL:', HACKER_NEWS_API_URL);
+console.log('NEWSTORIES_ENDPOINT:', NEWSTORIES_ENDPOINT);
+console.log('ITEM_ENDPOINT:', ITEM_ENDPOINT);
 
 
 
