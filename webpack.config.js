@@ -68,7 +68,6 @@ module.exports = () => {
         config.mode = 'production';
 
         config.plugins.push(new MiniCssExtractPlugin());
-            config.plugins.push(new Dotenv());
 
         
     } else {
