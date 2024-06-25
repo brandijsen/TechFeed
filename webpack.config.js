@@ -17,8 +17,8 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        clean: true
+       filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
     },
     devServer: {
         open: true,

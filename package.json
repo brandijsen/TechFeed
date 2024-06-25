@@ -1,6 +1,5 @@
 {
   "name": "my-webpack-project",
-  "homepage": "https://brandijsen.github.io/TechFeed",
   "version": "1.0.0",
   "description": "My webpack project",
   "main": "index.js",
@@ -10,9 +9,8 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve",
-     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "serve": "webpack serve"
+     
   },
   "keywords": [],
   "author": "",

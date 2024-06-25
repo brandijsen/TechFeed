@@ -1,0 +1,8 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[context.production.environment]
+  HACKER_NEWS_API_URL = "https://hacker-news.firebaseio.com/v0"
+  NEWSTORIES_ENDPOINT = "newstories.json"
+  ITEM_ENDPOINT = "item"
