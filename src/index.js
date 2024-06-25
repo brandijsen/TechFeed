@@ -3,14 +3,6 @@ const _ = require('lodash');
 
 import "./style.css"
 
-
-console.log('HACKER_NEWS_API_URL:', process.env.HACKER_NEWS_API_URL);
-
-
-
-
-
-
 // Importa le immagini
 import danGoldImg from './assets/images/dan-gold.jpg';
 import alexandreDebieveImg from './assets/images/alexandre-debieve.jpg';
@@ -112,17 +104,17 @@ setInterval(rotateImages, 3000);
 
 let moreNewsContainer; // Define this variable in the outer scope
 
-
-
-
 async function getNews() {
   try {
-    const response = await axios.get(`https://hacker-news.firebaseio.com/v0/newstories.json`);
+    const storiesApi = process.env.REACT_APP_HN_STORIES_API;
+    const itemApi = process.env.REACT_APP_HN_ITEM_API;
+
+    const response = await axios.get(storiesApi);
     const newsIds = response.data;
 
     const lastNewsIds = newsIds.slice(0, 20);
     const lastNewsPromises = lastNewsIds.map(id =>
-      axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+      axios.get(`${itemApi}${id}.json`)
     );
 
     const lastNewsResponses = await Promise.all(lastNewsPromises);
