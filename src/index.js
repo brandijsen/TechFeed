@@ -117,12 +117,12 @@ let moreNewsContainer; // Define this variable in the outer scope
 
 async function getNews() {
   try {
-    const response = await axios.get(`${process.env.HACKER_NEWS_API_URL}/${process.env.NEWSTORIES_ENDPOINT}`);
+    const response = await axios.get(`https://hacker-news.firebaseio.com/v0/newstories.json`);
     const newsIds = response.data;
 
     const lastNewsIds = newsIds.slice(0, 20);
     const lastNewsPromises = lastNewsIds.map(id =>
-      axios.get(`${process.env.HACKER_NEWS_API_URL}/${process.env.ITEM_ENDPOINT}/${id}.json`)
+      axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
     );
 
     const lastNewsResponses = await Promise.all(lastNewsPromises);
