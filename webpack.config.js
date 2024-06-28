@@ -27,8 +27,10 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
+            favicon: './src/assets/images/favicon-32x32.png',
+
         }),
-            new Dotenv(),
+        new Dotenv(),
             
 
 
