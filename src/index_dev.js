@@ -1,70 +1,22 @@
-// src/index_dev.js
+// index_dev.js
 
+alert("Ora sembra tutto un casino ma alla fine sarà più chiaro.. spero!");
+console.info("Va bene Fabio, se lo dici tu..");
 
-const axios = require('axios');
-const _ = require('lodash');
+// le funzioni asincrone si dichiarano aggiungendo async prima dell'espressione
+async function requestPollutionData() {
+  // la nostra chiave è al sicuro nelle Environment Variables
+  const API_PROVA = process.env.API_PROVA;
 
-async function getNews() {
-  try {
-    const response = await axios.get(process.env.HACKER_NEWS_API);
-    const newsIds = response.data;
+  // la parola chiave è await: è quella che dice a JS di fermarsi a questa riga finchè la fetch API non restituisce il risultato della richiesta
+  const response = await fetch(`${API_PROVA}`); // non scriverò COME fare la richiesta, va capito dalla documentazione https://aqicn.org/json-api/doc/
+  const data = await response.json();
 
-    const lastNewsIds = newsIds.slice(0, 20);
-    const lastNewsPromises = lastNewsIds.map(id =>
-      axios.get(`${process.env.HACKER_NEWS_API_ITEM}${id}.json`)
-    );
-
-    const lastNewsResponses = await Promise.all(lastNewsPromises);
-
-    const lastNews = lastNewsResponses.map(res => {
-      const title = _.get(res, 'data.title', 'Title not available');
-      const url = _.get(res, 'data.url', 'URL not available');
-      const author = _.get(res, 'data.by', 'Author not available');
-      const date = new Date(_.get(res, 'data.time', 0) * 1000);
-      return { title, url, author, date };
-    });
-
-    renderNews(lastNews);
-
-  } catch (err) {
-    console.error('Error fetching news:', err);
-  }
+  console.log(data); // facciamo ciò che vogliamo con i dati ottenuti: scelta, elaborazione, visualizzazione..
 }
 
-function renderNews(newsItems) {
-  const newsContainer = document.createElement('div');
-  newsContainer.className = 'news-container';
+requestPollutionData();
+// sarebbe meglio una IIFE: https://developer.mozilla.org/en-US/docs/Glossary/IIFE - non l'ho usata per rendere più chiaro il codice
 
-  newsItems.forEach(news => {
-    const newsItem = document.createElement('div');
-    newsItem.className = 'news-item';
-
-    const titleElement = document.createElement('h3');
-    titleElement.textContent = news.title;
-
-    const authorElement = document.createElement('p');
-    authorElement.textContent = `by ${news.author}`;
-
-    const dateElement = document.createElement('p');
-    const formattedDate = news.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    const formattedTime = news.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-    dateElement.textContent = `on ${formattedDate} at ${formattedTime}`;
-
-    const urlElement = document.createElement('a');
-    urlElement.href = news.url;
-    urlElement.textContent = 'Read more';
-    urlElement.target = '_blank';
-    urlElement.rel = 'noopener noreferrer';
-
-    newsItem.appendChild(titleElement);
-    newsItem.appendChild(authorElement);
-    newsItem.appendChild(dateElement);
-    newsItem.appendChild(urlElement);
-
-    newsContainer.appendChild(newsItem);
-  });
-
-  document.body.appendChild(newsContainer);
-}
-
-getNews();
+requestPollutionData();
+// sarebbe meglio una IIFE: https://developer.mozilla.org/en-US/docs/Glossary/IIFE - non l'ho usata per rendere più chiaro il codice

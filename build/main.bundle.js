@@ -1,1 +1,1 @@
-!async function(){const n=await fetch("/.netlify/functions/lambda");await n.json(),console.log(n)}();
+(()=>{async function o(){const o=await fetch("https://hacker-news.firebaseio.com/v0/newstories.json"),a=await o.json();console.log(a)}alert("Ora sembra tutto un casino ma alla fine sarà più chiaro.. spero!"),console.info("Va bene Fabio, se lo dici tu.."),o(),o()})();

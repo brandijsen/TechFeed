@@ -1,36 +1,18 @@
-// netlify/functions/lambda.js
+exports.handler = async (event) => {
+  // Più tardi imposteremo una variabile d'ambiente interna a Netlify stesso, accessibile semplicemente così:
+  const API_PROVA = process.env.API_PROVA;
 
-exports.handler = async (event, context) => {
-  try {
-    const axios = require('axios');
-    const _ = require('lodash');
+  // qui facciamo la chiamata alla API esattamente come la facevamo prima in index_dev.js
+  const response = await fetch(`endpoint/parameters&API_PROVA=${API_PROVA}`);
+  const data = await response.json();
 
-    const response = await axios.get(process.env.HACKER_NEWS_API);
-    const newsIds = response.data;
-
-    const lastNewsIds = newsIds.slice(0, 20);
-    const lastNewsPromises = lastNewsIds.map(id =>
-      axios.get(`${process.env.HACKER_NEWS_API_ITEM}${id}.json`)
-    );
-
-    const lastNewsResponses = await Promise.all(lastNewsPromises);
-
-    const lastNews = lastNewsResponses.map(res => {
-      const title = _.get(res, 'data.title', 'Title not available');
-      const url = _.get(res, 'data.url', 'URL not available');
-      const author = _.get(res, 'data.by', 'Author not available');
-      const date = new Date(_.get(res, 'data.time', 0) * 1000);
-      return { title, url, author, date };
-    });
-
+  // da qui in giù la funzione fa da back-end: elaboriamo dei dati e li rimandiamo al front-end in formato JSON con uno statusCode 200, cioè "successo".
+  const pass = (body) => {
     return {
       statusCode: 200,
-      body: JSON.stringify(lastNews),
+      body: JSON.stringify(body),
     };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to fetch news' }),
-    };
-  }
+  };
+
+  return pass(data);
 };

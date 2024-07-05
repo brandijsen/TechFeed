@@ -1,17 +1,19 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechFeed News</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <!-- Con questa riga htmlWebpackPlugin sostituisce il titolo del file con quello specificato in webpack.config.js - lo faremo fra poco! -->
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <!-- Questo è un placeholder per favicon.ico, ricordate di metterne uno decente prima di inviare il progetto :P -->
+
 </head>
 
 <body>
-    <script src="index_dev.js"></script>
+    <div id="wrapper">ciao</div>
 </body>
 
 </html>
